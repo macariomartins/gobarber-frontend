@@ -50,7 +50,18 @@
       }
     ],
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-unused-expressions": "off",
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never",
+        "imports": "always-multiline",
+        "objects": "always-multiline"
+      }
+    ]
   },
   "settings": {
     "import/resolver": {

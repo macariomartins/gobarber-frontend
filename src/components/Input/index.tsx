@@ -4,7 +4,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
 import { Container } from './styles';
@@ -16,7 +16,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = ({ name, icon: Icon, ...props }: InputProps): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { fieldName, defaultValue, registerField } = useField(name);
+  const { fieldName, defaultValue, error, registerField } = useField(name);
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -49,6 +49,8 @@ const Input = ({ name, icon: Icon, ...props }: InputProps): JSX.Element => {
         defaultValue={defaultValue}
         {...props}
       />
+
+      {error}
     </Container>
   );
 };
