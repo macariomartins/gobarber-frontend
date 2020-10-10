@@ -12,7 +12,7 @@ import { Background, Container, Content } from './styles';
 
 const SignIn = (): JSX.Element => {
   const formRef = useRef<FormHandles>(null);
-  const { signIn } = useContext(AuthContext);
+  const { user, signIn } = useContext(AuthContext);
 
   const handleSubmit = useCallback(
     async (signInData: SignInCredentials) => {
