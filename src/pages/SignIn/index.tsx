@@ -32,9 +32,11 @@ const SignIn = (): JSX.Element => {
 
         signIn(signInData);
       } catch (error) {
-        const errors = getValidationErrors(error);
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
+        }
       }
     },
     [signIn]
