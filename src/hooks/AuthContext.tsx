@@ -10,6 +10,7 @@ export interface SignInCredentials {
 export interface AuthContextData {
   user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 export const AuthContext = createContext<AuthContextData>(
@@ -53,8 +54,15 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     setAuthData({ token, user });
   }, []);
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@GoBarber:token');
+    localStorage.removeItem('@GoBarber:user');
+
+    setAuthData({} as AuthData);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: authData.user, signIn }}>
+    <AuthContext.Provider value={{ user: authData.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
