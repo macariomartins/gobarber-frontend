@@ -6,13 +6,15 @@ import * as Yup from 'yup';
 import logo from '../../assets/logo.svg';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import { SignInCredentials, useAuth } from '../../hooks/AuthContext';
+import { SignInCredentials, useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { Background, Container, Content } from './styles';
 
 const SignIn = (): JSX.Element => {
   const formRef = useRef<FormHandles>(null);
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (signInData: SignInCredentials) => {
@@ -30,16 +32,18 @@ const SignIn = (): JSX.Element => {
           abortEarly: false,
         });
 
-        signIn(signInData);
+        await signIn(signInData);
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
 
           formRef.current?.setErrors(errors);
         }
+
+        addToast();
       }
     },
-    [signIn]
+    [signIn, addToast]
   );
 
   return (

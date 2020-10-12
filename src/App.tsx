@@ -1,16 +1,14 @@
 import React from 'react';
-import ToastContainer from './components/ToastContainer';
-import { AuthProvider } from './hooks/AuthContext';
+import AppProvider from './hooks';
 import SignIn from './pages/SignIn';
 import GlobalStyle from './styles/global';
 
 const App = (): JSX.Element => {
   return (
     <>
-      <AuthProvider>
+      <AppProvider>
         <SignIn />
-      </AuthProvider>
-      <ToastContainer />
+      </AppProvider>
       <GlobalStyle />
     </>
   );
