@@ -40,7 +40,14 @@ const SignIn = (): JSX.Element => {
           formRef.current?.setErrors(errors);
         }
 
-        addToast();
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description: `
+            Ocorreu um erro ao fazer o login.
+            Por favor, verifique as credenciais.
+          `,
+        });
       }
     },
     [signIn, addToast]
